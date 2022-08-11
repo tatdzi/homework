@@ -6,34 +6,50 @@ import java.util.Scanner;
 
 public class Task_1_1_1 {
     public static void main(String[] args) {
-        int number;
-        String result;
+        int number,result;
+        String R, I;
+        String Result = " 1 ";
         Scanner in = new Scanner(System.in);
         System.out.println("Введите положительное целое число!");
-        if ((number = AverageNumberSearch.enterAndChackInt(in)) < 0){
+        //Проверка положительное ли число.
+        if ((number = AverageNumberSearch.enterAndChackInt(in)) < 0) {
             System.out.println("Ввенное число отрицательное!" +
                     "\nПопробуйте еще раз!");
             number = AverageNumberSearch.enterAndChackInt(in);
         }
         result = countFactorial(number);
-        System.out.println(result);
+        if (result == 0) {
+            System.out.println("Вы выбрали слишком большоеч число" +
+                    "\nПеременная переполнена и не может отразить результат!");
+        }else {
+            for (int i = 2;i<=number;++i){
+                I = Integer.toString(i);
+                Result +=" * "+I;
+            }
+            R = Integer.toString(result);
+            Result +=" = "+R;
+            System.out.println(Result);
+        }
     }
-    public static String countFactorial(int f){
-        String F,I,R;
+
+    /**
+     * Метод countFactorial вычисляет факториал целочисленного числа с помощью
+     * цикла и проверяет его на переполнение.
+     * @param f Число для которого нужно посчитать факториал.
+     * @return Возвращает результат вычисления, если происходит переполнение возвращает 0.
+     */
+    public static int countFactorial(int f){
+        int result1 = 1;
         int result = 1;
-        int i = 1;
-        F = Integer.toString(i);
-        for (i = 2;i <= f;++i){
-            I =Integer.toString(i);
-            F += " * "+I;
+        for (int i = 2; i <= f; ++i) {
             result *= i;
-            if (result < 0){
-                F += "(Тратата, int уже переполнен!)";
+            if (result1 == result / i){ //Универсальная проверка в случае,
+                result1 *= i;           //если максимально возможное число было переменным значением.
+            }else {                     //Теоретически достаточно сделать if (f > 12) то переполнение.
+                result = 0;
                 break;
             }
         }
-        R = Integer.toString(result);
-        F +=" = "+R;
-        return F;
+        return result;
     }
 }

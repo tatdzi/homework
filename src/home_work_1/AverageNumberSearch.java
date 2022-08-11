@@ -27,10 +27,14 @@ public class AverageNumberSearch {
      * @return переменная int
      */
     public static int enterAndChackInt(Scanner input) {
-        while (!input.hasNextInt()) {
-            System.out.println("Это очень большое число или не являетя им\n" +
-                    "Попробуйте еще раз!");
-            input.next();
+        while (!(input.hasNextInt())){
+            if (input.hasNextDouble()){
+                System.out.println("Введено не целое число");
+                input.next();
+            }else if (input.hasNextLine()){
+                System.out.println("Введено не число");
+                input.next();
+            }
         }
         return input.nextInt();
     }
