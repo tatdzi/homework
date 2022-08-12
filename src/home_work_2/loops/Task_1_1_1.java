@@ -1,22 +1,22 @@
 package home_work_2.loops;
 
-import home_work_1.AverageNumberSearch;
-
-import java.util.Scanner;
-
 public class Task_1_1_1 {
     public static void main(String[] args) {
         int number,result;
         String R, I;
         String Result = " 1 ";
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите положительное целое число!");
-        //Проверка положительное ли число.
-        if ((number = AverageNumberSearch.enterAndChackInt(in)) < 0) {
-            System.out.println("Ввенное число отрицательное!" +
-                    "\nПопробуйте еще раз!");
-            number = AverageNumberSearch.enterAndChackInt(in);
+        if (args.length==0){
+            System.out.println("Нет аргумента!\nЗапустите программу с правильным аргументом!");
+            System.exit(0);
         }
+        boolean check = checkArgs(args[0]);
+        if (!(check)) {
+            System.out.println("Неправильный аргумент!\nЗапустите программу с правильным аргументом!");
+            System.exit(0);
+        }
+        number = Integer.parseInt(args[0]);
+        System.out.println("Ваш аргумент : "+number);
+
         result = countFactorial(number);
         if (result == 0) {
             System.out.println("Вы выбрали слишком большоеч число" +
@@ -51,5 +51,20 @@ public class Task_1_1_1 {
             }
         }
         return result;
+    }
+
+    /**
+     * Метод checkArgs проверяет можно ли бреобразовать строку в int.
+     * @param a Строка
+     * @return true - можно преобразовать; false - нельзя преобразовать.
+     */
+    public static boolean checkArgs(String a){
+        try {
+            Integer.parseInt(a);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+
     }
 }
