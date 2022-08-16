@@ -2,6 +2,7 @@ package home_work_2.utils;
 
 import home_work_1.AverageNumberSearch;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class ArrayUtils {
@@ -29,9 +30,10 @@ public class ArrayUtils {
      * @return Созданный массив.
      */
     public static int[] arrayRandom(int size, int maxValueExclusion) {
+        Random rand = new Random();
         int[] array = new int[size];
         for (int i = 0; i <= size - 1; ++i) {
-            array[i] = (int) (Math.random() * maxValueExclusion);
+            array[i] =rand.nextInt(maxValueExclusion*2)-maxValueExclusion;
         }
         return array;
     }
