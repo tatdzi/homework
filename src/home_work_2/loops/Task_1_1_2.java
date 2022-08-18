@@ -3,16 +3,13 @@ package home_work_2.loops;
 public class Task_1_1_2 {
     public static void main(String[] args) {
         int number, result;
-        String I,R;
-        String Result = "1";
-        if (args.length==0){
+        if (args.length == 0) {
             System.out.println("Нет аргумента!\nЗапустите программу с правильным аргументом!");
-            System.exit(0);
+            return;
         }
         boolean check = Task_1_1_1.checkArgs(args[0]);
-        if (!(check)) {
-            System.out.println("Неправильный аргумент!\nЗапустите программу с правильным аргументом!");
-            System.exit(0);
+        if (!check){
+            return;
         }
         number = Integer.parseInt(args[0]);
         System.out.println("Ваш аргумент : "+number);
@@ -20,15 +17,11 @@ public class Task_1_1_2 {
         if (result == 0) {
             System.out.println("Вы выбрали слишком большоеч число" +
                     "\nПеременная переполнена и не может отразить результат!");
-        }else {
-            for (int i = 2;i<=number;++i){
-                I = Integer.toString(i);
-                Result +=" * "+I;
-            }
-            R = Integer.toString(result);
-            Result +=" = "+R;
-            System.out.println(Result);
         }
+        String Result = Task_1_1_1.format(number,result);
+        System.out.println(Result);
+
+
     }
 
     /**
