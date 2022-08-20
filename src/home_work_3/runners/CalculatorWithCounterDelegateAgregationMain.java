@@ -1,10 +1,12 @@
 package home_work_3.runners;
 
+import home_work_3.calcs.additional.CalculatorWithCounterAutoAgregation;
 import home_work_3.calcs.additional.CalculatorWithCounterAutoSuper;
 
-public class CalculatorWithCounterAutoSuperMain {
+public class CalculatorWithCounterDelegateAgregationMain {
     public static void main(String[] args) {
-        CalculatorWithCounterAutoSuper calc = new CalculatorWithCounterAutoSuper();
+        CalculatorWithCounterAutoSuper a =new CalculatorWithCounterAutoSuper();
+        CalculatorWithCounterAutoAgregation calc = new CalculatorWithCounterAutoAgregation(a);
         double result = calc.plus(4.1,(calc.plus(calc.multiplication(15,7)
                 ,calc.pow(calc.division(28,5),2))));
         System.out.println(calc.getCountOperation());

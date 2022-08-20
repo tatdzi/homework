@@ -1,16 +1,18 @@
 package home_work_3.calcs.simple;
 
-public class CalculatorWithMathCopy {
+import home_work_3.calcs.api.ICalculator;
+
+public class CalculatorWithMathCopy implements ICalculator {
     public double division(double a,double b){
         return a / b;
     }
     public double multiplication(double a,double b){
         return  a * b;
     }
-    public double addition(double a,double b){
+    public double plus(double a,double b){
         return a + b;
     }
-    public double subtraction(double a,double b){
+    public double minus(double a,double b){
         return a - b;
     }
     public double pow(double a,int b){
@@ -22,4 +24,6 @@ public class CalculatorWithMathCopy {
     public double sqrt(double a) {
         return Math.sqrt(a);
     }
+
+
 }

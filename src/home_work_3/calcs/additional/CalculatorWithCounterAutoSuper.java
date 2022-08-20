@@ -3,38 +3,38 @@ package home_work_3.calcs.additional;
 import home_work_3.calcs.simple.CalculatorWithMathExtends;
 
 public class CalculatorWithCounterAutoSuper extends CalculatorWithMathExtends {
-    long counter;
+    private long countOperation;
 
-    public long getCounter() {
-        return counter;
+    public long getCountOperation() {
+        return countOperation;
     }
 
     public double division(double a, double b){
-        this.counter=this.counter+1;
-        return a / b;
+        countOperation++;
+        return super.division(a,b);
     }
     public double multiplication(double a,double b){
-        this.counter=this.counter+1;
+        countOperation++;
         return  a * b;
     }
     public double plus(double a,double b){
-        this.counter=this.counter+1;
-        return a + b;
+        countOperation++;
+        return super.plus(a,b);
     }
     public double minus(double a,double b){
-        this.counter=this.counter+1;
-        return a - b;
+        countOperation++;
+        return super.minus(a,b);
     }
     public double pow(double a,int b){
-        this.counter=this.counter+1;
-        return Math.pow(a,b);
+        countOperation++;
+        return super.pow(a,b);
     }
     public double abs(int a){
-        this.counter=this.counter+1;
-        return Math.abs(a);
+        countOperation++;
+        return super.abs(a);
     }
     public double sqrt(double a) {
-        this.counter=this.counter+1;
-        return Math.sqrt(a);
+        countOperation++;
+        return super.sqrt(a);
     }
 }
