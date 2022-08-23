@@ -4,7 +4,7 @@ import home_work_3.calcs.api.ICalculator;
 
 public class CalculatorWithMemory {
     private ICalculator I;
-    private long CountOperation;
+    private long countOperation;
     private double result;
     private double memory;
     public CalculatorWithMemory(ICalculator i) {
@@ -21,40 +21,40 @@ public class CalculatorWithMemory {
     }
 
     public long getCountOperation() {
-        return CountOperation;
+        return countOperation;
     }
-    public double division(double a,double b){
-        CountOperation++;
-        return result=I.division(a, b);
+    public double div(double a,double b){
+        countOperation++;
+        return result=I.div(a, b);
 
     }
-    public double multiplication(double a,double b){
-        CountOperation++;
-        return result=I.multiplication(a,b);
+    public double mul(double a,double b){
+        countOperation++;
+        return result=I.mul(a,b);
 
     }
     public double plus(double a,double b){
-        CountOperation++;
+        countOperation++;
         return result=I.plus(a,b);
 
     }
     public double minus(double a,double b){
-        CountOperation++;
+        countOperation++;
         return result=I.minus(a,b);
 
     }
     public double pow(double a,int b){
-        CountOperation++;
+        countOperation++;
         return result=I.pow(a,b);
 
     }
     public double abs(int a){
-        CountOperation++;
+        countOperation++;
         return result=I.abs(a);
 
     }
     public double sqrt(double a) {
-        CountOperation++;
+        countOperation++;
         return result=I.sqrt(a);
 
     }

@@ -3,10 +3,10 @@ package home_work_3.calcs.simple;
 import home_work_3.calcs.api.ICalculator;
 
 public class CalculatorWithOperator implements ICalculator {
-    public double division(double a,double b){
+    public double div(double a,double b){
         return a / b;
     }
-    public double multiplication(double a,double b){
+    public double mul(double a,double b){
         return  a * b;
     }
     public double plus(double a,double b){

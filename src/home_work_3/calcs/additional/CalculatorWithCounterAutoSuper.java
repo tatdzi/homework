@@ -9,13 +9,13 @@ public class CalculatorWithCounterAutoSuper extends CalculatorWithMathExtends {
         return countOperation;
     }
 
-    public double division(double a, double b){
+    public double div(double a, double b){
         countOperation++;
-        return super.division(a,b);
+        return super.div(a,b);
     }
-    public double multiplication(double a,double b){
+    public double mul(double a,double b){
         countOperation++;
-        return  a * b;
+        return  super.mul(a,b);
     }
     public double plus(double a,double b){
         countOperation++;

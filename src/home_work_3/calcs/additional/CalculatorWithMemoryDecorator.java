@@ -4,10 +4,10 @@ import home_work_3.calcs.api.ICalculator;
 import home_work_3.calcs.simple.CalculatorWithMathExtends;
 
 public class CalculatorWithMemoryDecorator implements ICalculator {
-    private static ICalculator I;
-    private static double memory;
+    private  ICalculator I;
+    private  double memory;
 
-    public static ICalculator getCalculator(){
+    public  ICalculator getCalculator(){
         return I;
     }
 
@@ -15,7 +15,7 @@ public class CalculatorWithMemoryDecorator implements ICalculator {
         this.I = I;
     }
 
-    public static double getMemory() {
+    public  double getMemory() {
         double out;
         out = memory;
         memory = 0;
@@ -23,13 +23,13 @@ public class CalculatorWithMemoryDecorator implements ICalculator {
     }
 
     @Override
-    public double division(double a, double b) {
-        return memory=I.division(a,b);
+    public double div(double a, double b) {
+        return memory=I.div(a,b);
     }
 
     @Override
-    public double multiplication(double a, double b) {
-        return memory=I.multiplication(a,b);
+    public double mul(double a, double b) {
+        return memory=I.mul(a,b);
     }
 
     @Override

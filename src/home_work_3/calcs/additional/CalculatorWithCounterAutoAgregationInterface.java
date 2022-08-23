@@ -4,49 +4,45 @@ import home_work_3.calcs.api.ICalculator;
 
 public class CalculatorWithCounterAutoAgregationInterface {
     private ICalculator I;
-    private long CountOperation;
+    private long countOperation;
 
     public CalculatorWithCounterAutoAgregationInterface(ICalculator i) {
         I = i;
     }
-
     public long getCountOperation() {
-        return CountOperation;
+        return countOperation;
     }
-
-
-    public double division(double a,double b){
-        CountOperation++;
-        return I.division(a, b);
-
+    public double div(double a,double b){
+        countOperation++;
+        return I.div(a, b);
     }
-    public double multiplication(double a,double b){
-        CountOperation++;
-        return I.multiplication(a,b);
+    public double mul(double a,double b){
+        countOperation++;
+        return I.mul(a,b);
 
     }
     public double plus(double a,double b){
-        CountOperation++;
+        countOperation++;
         return I.plus(a,b);
 
     }
     public double minus(double a,double b){
-        CountOperation++;
+        countOperation++;
         return I.minus(a,b);
 
     }
     public double pow(double a,int b){
-        CountOperation++;
+        countOperation++;
         return I.pow(a,b);
 
     }
     public double abs(int a){
-        CountOperation++;
+        countOperation++;
         return I.abs(a);
 
     }
     public double sqrt(double a) {
-        CountOperation++;
+        countOperation++;
         return I.sqrt(a);
 
     }

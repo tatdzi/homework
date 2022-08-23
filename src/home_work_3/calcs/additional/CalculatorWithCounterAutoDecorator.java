@@ -5,8 +5,8 @@ import home_work_3.calcs.simple.CalculatorWithMathExtends;
 
 public class CalculatorWithCounterAutoDecorator implements ICalculator {
     private static ICalculator I;
-    private static long CountOperation;
-    public static ICalculator getCalculator(){
+    private long countOperation;
+    public  ICalculator getCalculator(){
         return I;
     }
 
@@ -14,49 +14,49 @@ public class CalculatorWithCounterAutoDecorator implements ICalculator {
         this.I = I;
     }
 
-    public static long getCountOperation() {
-        return CountOperation;
+    public long getCountOperation() {
+        return countOperation;
     }
 
     @Override
-    public double division(double a, double b) {
-        CountOperation++;
-        return I.division(a,b);
+    public double div(double a, double b) {
+        countOperation++;
+        return I.div(a,b);
     }
 
     @Override
-    public double multiplication(double a, double b) {
-        CountOperation++;
-        return I.multiplication(a,b);
+    public double mul(double a, double b) {
+        countOperation++;
+        return I.mul(a,b);
     }
 
     @Override
     public double plus(double a, double b) {
-        CountOperation++;
+        countOperation++;
         return I.plus(a,b);
     }
 
     @Override
     public double minus(double a, double b) {
-        CountOperation++;
+        countOperation++;
         return I.minus(a,b);
     }
 
     @Override
     public double pow(double a, int b) {
-        CountOperation++;
+        countOperation++;
         return I.pow(a,b);
     }
 
     @Override
     public double abs(int a) {
-        CountOperation++;
+        countOperation++;
         return I.abs(a);
     }
 
     @Override
     public double sqrt(double a) {
-        CountOperation++;
+        countOperation++;
        return I.sqrt(a);
     }
 }

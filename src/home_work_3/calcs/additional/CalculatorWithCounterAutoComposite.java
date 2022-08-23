@@ -8,11 +8,11 @@ public class CalculatorWithCounterAutoComposite {
         return calc.getCountOperation();
     }
 
-    public double division(double a,double b){
-        return calc.division(a,b);
+    public double div(double a,double b){
+        return calc.div(a,b);
     }
-    public double multiplication(double a,double b){
-        return  calc.multiplication(a,b);
+    public double mul(double a,double b){
+        return  calc.mul(a,b);
     }
     public double plus(double a,double b){
         return calc.plus(a,b);

@@ -3,10 +3,6 @@ package home_work_3.calcs.simple;
 import home_work_3.calcs.api.ICalculator;
 
 public class CalculatorWithMathExtends extends CalculatorWithOperator implements ICalculator {
-    //ICalculator I;
-    //public CalculatorWithMathExtends(ICalculator I) {
-    //    this.I=I;
-    //}
 
     public double pow(double a, int b){
         return Math.pow(a,b);

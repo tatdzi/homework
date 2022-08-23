@@ -3,10 +3,10 @@ package home_work_3.calcs.additional;
 import home_work_3.calcs.simple.CalculatorWithMathExtends;
 
 public class CalculatorWithCounterClassic extends CalculatorWithMathExtends {
-    long counter;
+    private long counter;
 
     public void incrementCountOperation(){
-        this.counter=this.counter+1;
+        this.counter = this.counter+1;
     }
 
     public long getCounter() {

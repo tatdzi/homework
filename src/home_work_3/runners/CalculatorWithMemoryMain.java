@@ -9,8 +9,8 @@ public class CalculatorWithMemoryMain {
     public static void main(String[] args) {
         ICalculator I = new CalculatorWithCounterAutoSuper();
         CalculatorWithMemory calc = new CalculatorWithMemory(I);
-        calc.plus(4.1,(calc.plus(calc.multiplication(15,7)
-                ,calc.pow(calc.division(28,5),2))));
+        calc.plus(4.1,(calc.plus(calc.mul(15,7)
+                ,calc.pow(calc.div(28,5),2))));
         calc.setMemory();
         System.out.println(calc.getMemory());
         System.out.println(calc.getMemory());

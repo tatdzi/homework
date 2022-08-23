@@ -12,8 +12,8 @@ public class CalculatorWithCounterAutoCompositeInterfaceMain {
     public static void main(String[] args) {
         ICalculator I = new CalculatorWithCounterAutoSuper();
         CalculatorWithCounterAutoAgregationInterface calc = new CalculatorWithCounterAutoAgregationInterface(I);
-        double result = calc.plus(4.1,(calc.plus(calc.multiplication(15,7)
-                ,calc.pow(calc.division(28,5),2))));
+        double result = calc.plus(4.1,(calc.plus(calc.mul(15,7)
+                ,calc.pow(calc.div(28,5),2))));
         System.out.println(calc.getCountOperation());
         System.out.println(result);
     }
