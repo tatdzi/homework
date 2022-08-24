@@ -8,27 +8,27 @@ public class CalculatorWithCounterAutoAgregation {
         this.calc = calc;
     }
         public long getCountOperation() {
-            return getCountOperation();
+            return calc.getCountOperation();
         }
         public double div(double a,double b){
-            return div(a,b);
+            return calc.div(a,b);
         }
         public double mul(double a,double b){
-            return  mul(a,b);
+            return  calc.mul(a,b);
         }
         public double plus(double a,double b){
-            return plus(a,b);
+            return calc.plus(a,b);
         }
         public double minus(double a,double b){
-            return minus(a,b);
+            return calc.minus(a,b);
         }
         public double pow(double a,int b){
-            return pow(a,b);
+            return calc.pow(a,b);
         }
         public double abs(int a){
-            return abs(a);
+            return calc.abs(a);
         }
         public double sqrt(double a) {
-            return sqrt(a);
+            return calc.sqrt(a);
         }
 }
