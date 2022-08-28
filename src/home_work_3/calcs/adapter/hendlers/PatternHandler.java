@@ -8,9 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class PatternHandler implements IHandler {
-
-    public static String s ="([/*+-^]?)[(\\d{1,}(\\.\\d{1,}){0,1})]?([/*+-^]?)" ;
-
     public static final String NUMBER_PATTERN =  "(\\d{1,}(\\.\\d{1,}){0,1})" ;
     private final ICalculator calc;
     private final Pattern pattern;
