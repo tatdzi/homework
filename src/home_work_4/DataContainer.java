@@ -10,7 +10,15 @@ public class DataContainer<T> implements Iterable<T> {
 
     public DataContainer(T[] data) {
         this.data = data;
-        iterator();
+    }
+
+    public void increaseArray(){
+        T[] data = Arrays.copyOf(this.data, this.data.length + 1);
+        this.data = data;
+    }
+    public void decreaseArray(){
+        T[] data = Arrays.copyOf(this.data, this.data.length - 1);
+        this.data = data;
     }
 
     /**
@@ -21,12 +29,11 @@ public class DataContainer<T> implements Iterable<T> {
      * @param item
      * @return
      */
-    int add(T item) {
+    public int add(T item) {
         if (item == null) {
             return -1;
         } else if (data.length == 0) {
-            T[] data = Arrays.copyOf(this.data, this.data.length + 1);
-            this.data = data;
+            increaseArray();
             data[data.length - 1] = item;
         } else {
             for (int i = 0; i < data.length; i++) {
@@ -36,8 +43,7 @@ public class DataContainer<T> implements Iterable<T> {
                 }
             }
             if (data[data.length - 1] != null) {
-                T[] data = Arrays.copyOf(this.data, this.data.length + 1);
-                this.data = data;
+                increaseArray();
                 data[data.length - 1] = item;
             }
         }
@@ -83,18 +89,18 @@ public class DataContainer<T> implements Iterable<T> {
         } else if (data[index] == null) {
             return false;
         } else {
-            for (int i = index; i < data.length - 1; i++) {
+            for (int i = index; i < data.length; i++) {
+                if (i<data.length-1) {
                     T t = data[i];
                     data[i] = data[i + 1];
                     data[i + 1] = t;
-                    if (i + 1 == data.length - 1) {
-                        T[] data = Arrays.copyOf(this.data, i + 1);
-                        this.data = data;
-                    }
+                }else {
+                    decreaseArray();
                 }
             }
-            return true;
         }
+        return true;
+    }
 
     boolean delete(T item) {
         boolean more = true;
@@ -103,21 +109,20 @@ public class DataContainer<T> implements Iterable<T> {
             do {
                 for (int i = 0; i < data.length; i++) {
                     if (Objects.equals(item, data[i])) {
-                        if (i == data.length-1){
-                            T[] data = Arrays.copyOf(this.data, this.data.length - 1);
-                            this.data = data;
+                        if (i == data.length - 1) {
+                            decreaseArray();
                             more = true;
                             result = true;
-                        }else {
+                        } else {
                             T t = data[i];
                             data[i] = data[i + 1];
                             data[i + 1] = t;
                         }
-                        } else {
+                    } else {
                         more = false;
                     }
                 }
-            }while (more);
+            } while (more);
         }
         return result;
     }
@@ -132,39 +137,40 @@ public class DataContainer<T> implements Iterable<T> {
     public String toString() {
         String result = "[";
         for (int i = 0; i < data.length; i++) {
-            if (i == 0 ){
-                if (data[i] != null){
-                    result += data[i] ;
-                }else{
-                    for (int j = i;j<data.length;j++){
-                        if (data[j] != null){
+            if (i == 0) {
+                if (data[i] != null) {
+                    result += data[i];
+                } else {
+                    for (int j = i; j < data.length; j++) {
+                        if (data[j] != null) {
                             result += data[j];
                             break;
                         }
                     }
                 }
-            }else if (data[i] != null) {
-                result += ", "+data[i] ;
+            } else if (data[i] != null) {
+                result += ", " + data[i];
             }
         }
-        result +="]";
+        result += "]";
         return result;
     }
 
     /**
      * Переопределить метод toString() в классе и выводить содержимое
      * data без ячеек в которых хранится null.
+     *
      * @return
      */
     public String toStringBuilder() {
         StringBuilder builder = new StringBuilder();
         boolean comma = false;
         builder.append("[");
-        for (int i = 0 ; i < data.length ; i++){
-            if (data[i] != null){
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] != null) {
                 if (comma) {
                     builder.append(", ");
-                }else {
+                } else {
                     comma = true;
                 }
                 builder.append(data[i]);
@@ -181,14 +187,15 @@ public class DataContainer<T> implements Iterable<T> {
      * реализацию сравнения из ПЕРЕДАННОГО объекта comparator.
      * Классом Arrays пользоваться запрещено. Интефейс Comparator обязательно должен
      * быть реализован отдельным классом.
+     *
      * @param cont
      */
 
-    public  void sort(Comparator<T> cont) {
+    public void sort(Comparator<T> cont) {
         for (int i = 0; i < data.length - 1; i++) {
             for (int j = i + 1; j < data.length; j++) {
-                if (cont.compare( data[i],  data[j]) > 0) {
-                    T a =  data[i];
+                if (cont.compare(data[i], data[j]) > 0) {
+                    T a = data[i];
                     data[i] = data[j];
                     data[j] = a;
                 }
@@ -197,18 +204,19 @@ public class DataContainer<T> implements Iterable<T> {
     }
 
     /**
-     *В DataContainer добавить СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container)
+     * В DataContainer добавить СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container)
      * с дженериком extends Comparable. Данный метод будет сортировать элементы в ПЕРЕДАННОМ объекте
      * DataContainer используя реализацию сравнения вызываемый у хранимых объектов.
      * Для этого надо сделать дженерик метод.
+     *
      * @param cont
      */
-    public static void sort(DataContainer<? extends Comparable> cont){
+    public static void sort(DataContainer<? extends Comparable> cont) {
         Comparable[] arr = cont.getItems();
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i].compareTo(arr[j]) > 0) {
-                    Comparable a =  arr[i];
+                    Comparable a = arr[i];
                     arr[i] = arr[j];
                     arr[j] = a;
                 }
@@ -217,47 +225,71 @@ public class DataContainer<T> implements Iterable<T> {
     }
 
     /**
-     *В DataContainer добавить СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container,
+     * В DataContainer добавить СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container,
      * Comparator<.......> comparator) который будет принимать объект DataContainer и реализацию интерфейса
      * Comparator. Данный метод будет сортировать элементы в ПЕРЕДАННОМ объекте DataContainer используя
      * реализацию сравнения из ПЕРЕДАННОГО объекта интерфейса Comparator.
+     *
      * @param cont
      * @param comp
      */
-    static <Comparable> void sort(DataContainer<? extends Comparable> cont, Comparator<Comparable> comp){
+    public static <Comparable> void sort(DataContainer<? extends Comparable> cont, Comparator<Comparable> comp) {
         Comparable[] arr = cont.getItems();
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (comp.compare( arr[i],arr[j]) > 0) {
-                    Comparable a =  arr[i];
+                if (comp.compare(arr[i], arr[j]) > 0) {
+                    Comparable a = arr[i];
                     arr[i] = arr[j];
                     arr[j] = a;
                 }
             }
         }
 
+    }
+
+    public void testIterator() {
+        Iterator <T> it = iterator();
+        while (it.hasNext()) {
+            if (it.next() == null){
+                it.remove();
+            }
+        }
     }
 
     /**
      * Реализовать в DataContainer интерфейс Iterable
+     *
      * @return
      */
-    public Iterator iterator() {
+    public Iterator <T> iterator() {
         return new IteratorData();
-
     }
 
-    public class IteratorData implements Iterator {
-        int index;
+    public class IteratorData implements Iterator<T> {
+        private int index = 0;
 
         @Override
         public boolean hasNext() {
             return index < data.length;
         }
 
+
         @Override
-        public Object next() {
+        public T next() {
             return data[index++];
+        }
+
+        @Override
+        public void remove() {
+            for (int i = index-1; i < data.length; i++) {
+                if (i<data.length-1) {
+                    T t = data[i];
+                    data[i] = data[i + 1];
+                    data[i + 1] = t;
+                }else {
+                    decreaseArray();
+                }
+            }
         }
     }
 }

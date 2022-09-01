@@ -7,6 +7,9 @@ public class DataContainerMain {
         DataContainer<String> container1 = new DataContainer<>(new String[5]);
         DataContainer<Integer> container2 = new DataContainer<>(new Integer[5]);
         DataContainer<Integer> container3 = new DataContainer<>(new Integer[]{null,4,1,null,34,7,null});
+        System.out.println(Arrays.toString(container3.getItems()));
+        container3.testIterator();
+        System.out.println(Arrays.toString(container3.getItems()));
         System.out.println(container3.toStringBuilder());
         StringComparator comparatorS = new StringComparator();
         IntegerComparator comparatorI = new IntegerComparator();
