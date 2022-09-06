@@ -9,16 +9,7 @@ public class DataContainer<T> implements Iterable<T> {
     private T[] data;
 
     public DataContainer(T[] data) {
-        this.data = data;
-    }
-
-    public void increaseArray(){
-        T[] data = Arrays.copyOf(this.data, this.data.length + 1);
-        this.data = data;
-    }
-    public void decreaseArray(){
-        T[] data = Arrays.copyOf(this.data, this.data.length - 1);
-        this.data = data;
+        this.data =Arrays.copyOf(data,data.length);
     }
 
     /**
@@ -32,22 +23,22 @@ public class DataContainer<T> implements Iterable<T> {
     public int add(T item) {
         if (item == null) {
             return -1;
-        } else if (data.length == 0) {
-            increaseArray();
-            data[data.length - 1] = item;
-        } else {
-            for (int i = 0; i < data.length; i++) {
-                if (data[i] == null) {
-                    data[i] = item;
-                    return i;
-                }
-            }
-            if (data[data.length - 1] != null) {
-                increaseArray();
-                data[data.length - 1] = item;
+        }
+
+        int indexForInsert = -1;
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] == null) {
+                indexForInsert = i;
+                break;
             }
         }
-        return data.length - 1;
+        if (indexForInsert == -1) {
+            indexForInsert = this.data.length;
+            this.data = Arrays.copyOf(this.data, this.data.length + 1);
+        }
+        data[indexForInsert] = item;
+
+        return indexForInsert;
     }
 
     /**
@@ -59,11 +50,16 @@ public class DataContainer<T> implements Iterable<T> {
      * @return
      */
     public T get(int index) {
-        if (index > data.length - 1) {
+        if (!checkIndexExist(index)){
             return null;
-        } else {
-            return data[index];
         }
+
+        return data[index];
+    }
+
+
+    private  boolean checkIndexExist(int index){
+        return index >= 0 && index < this.data.length;
     }
 
     /**
@@ -73,7 +69,7 @@ public class DataContainer<T> implements Iterable<T> {
      * @return
      */
     public T[] getItems() {
-        return data;
+        return Arrays.copyOf(this.data,this.data.length);
     }
 
     /**
@@ -83,77 +79,32 @@ public class DataContainer<T> implements Iterable<T> {
      * @param index
      * @return
      */
-    boolean delete(int index) {
-        if (index > data.length - 1) {
+    public boolean delete(int index) {
+        if (!checkIndexExist(index)) {
             return false;
-        } else if (data[index] == null) {
-            return false;
-        } else {
-            for (int i = index; i < data.length; i++) {
-                if (i<data.length-1) {
-                    T t = data[i];
-                    data[i] = data[i + 1];
-                    data[i + 1] = t;
-                }else {
-                    decreaseArray();
-                }
-            }
         }
+
+        for (int i = index + 1; i < data.length; i++) {
+            this.data[i - 1] = this.data[i];
+        }
+
+        this.data = Arrays.copyOf(this.data, this.data.length - 1);
+
         return true;
     }
 
-    boolean delete(T item) {
-        boolean more = true;
-        boolean result = false;
-        if (item != null) {
-            do {
-                for (int i = 0; i < data.length; i++) {
-                    if (Objects.equals(item, data[i])) {
-                        if (i == data.length - 1) {
-                            decreaseArray();
-                            more = true;
-                            result = true;
-                        } else {
-                            T t = data[i];
-                            data[i] = data[i + 1];
-                            data[i + 1] = t;
-                        }
-                    } else {
-                        more = false;
-                    }
-                }
-            } while (more);
+    public boolean delete(T item) {
+        if (item == null) {
+            return true;
         }
-        return result;
-    }
 
-    /**
-     * Переопределить метод toString() в классе и выводить содержимое
-     * data без ячеек в которых хранится null.
-     *
-     * @return
-     */
-    @Override
-    public String toString() {
-        String result = "[";
         for (int i = 0; i < data.length; i++) {
-            if (i == 0) {
-                if (data[i] != null) {
-                    result += data[i];
-                } else {
-                    for (int j = i; j < data.length; j++) {
-                        if (data[j] != null) {
-                            result += data[j];
-                            break;
-                        }
-                    }
-                }
-            } else if (data[i] != null) {
-                result += ", " + data[i];
+            if (Objects.equals(item, data[i])) {
+                return delete(i);
             }
         }
-        result += "]";
-        return result;
+
+        return false;
     }
 
     /**
@@ -162,24 +113,23 @@ public class DataContainer<T> implements Iterable<T> {
      *
      * @return
      */
-    public String toStringBuilder() {
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         boolean comma = false;
         builder.append("[");
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] != null) {
+        for (T datum : data) {
+            if (datum != null) {
                 if (comma) {
                     builder.append(", ");
                 } else {
                     comma = true;
                 }
-                builder.append(data[i]);
+                builder.append(datum);
             }
         }
         builder.append("]");
         return builder.toString();
     }
-
 
     /**
      * Добавить НЕ СТАТИЧЕСКИЙ метод void sort(Comparator<.......> comparator).
@@ -192,15 +142,7 @@ public class DataContainer<T> implements Iterable<T> {
      */
 
     public void sort(Comparator<T> cont) {
-        for (int i = 0; i < data.length - 1; i++) {
-            for (int j = i + 1; j < data.length; j++) {
-                if (cont.compare(data[i], data[j]) > 0) {
-                    T a = data[i];
-                    data[i] = data[j];
-                    data[j] = a;
-                }
-            }
-        }
+        DataContainer.sort(this,cont);
     }
 
     /**
@@ -211,17 +153,8 @@ public class DataContainer<T> implements Iterable<T> {
      *
      * @param cont
      */
-    public static void sort(DataContainer<? extends Comparable> cont) {
-        Comparable[] arr = cont.getItems();
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i].compareTo(arr[j]) > 0) {
-                    Comparable a = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = a;
-                }
-            }
-        }
+    public static <T> void sort(DataContainer<? extends Comparable> cont) {
+        DataContainer.sort(cont,new ComparatorComparable());
     }
 
     /**
@@ -233,27 +166,17 @@ public class DataContainer<T> implements Iterable<T> {
      * @param cont
      * @param comp
      */
-    public static <Comparable> void sort(DataContainer<? extends Comparable> cont, Comparator<Comparable> comp) {
-        Comparable[] arr = cont.getItems();
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (comp.compare(arr[i], arr[j]) > 0) {
-                    Comparable a = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = a;
+    public static <T> void sort(DataContainer<T> cont, Comparator<? super T> comp) {
+        for (int i = 0; i < cont.data.length - 1; i++) {
+            for (int j = i + 1; j < cont.data.length; j++) {
+                if (comp.compare(cont.data[i], cont.data[j]) > 0) {
+                    T a = cont.data[i];
+                    cont.data[i] = cont.data[j];
+                    cont.data[j] = a;
                 }
             }
         }
 
-    }
-
-    public void testIterator() {
-        Iterator <T> it = iterator();
-        while (it.hasNext()) {
-            if (it.next() == null){
-                it.remove();
-            }
-        }
     }
 
     /**
@@ -265,31 +188,23 @@ public class DataContainer<T> implements Iterable<T> {
         return new IteratorData();
     }
 
-    public class IteratorData implements Iterator<T> {
-        private int index = 0;
+    private class IteratorData implements Iterator<T> {
+        private int index = -1;
 
         @Override
         public boolean hasNext() {
-            return index < data.length;
+            return checkIndexExist(index + 1);
         }
 
 
         @Override
         public T next() {
-            return data[index++];
+            return data[++index];
         }
 
-        @Override
         public void remove() {
-            for (int i = index-1; i < data.length; i++) {
-                if (i<data.length-1) {
-                    T t = data[i];
-                    data[i] = data[i + 1];
-                    data[i + 1] = t;
-                }else {
-                    decreaseArray();
-                }
-            }
+            delete(index);
         }
+
     }
 }
