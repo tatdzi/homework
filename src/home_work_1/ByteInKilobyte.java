@@ -14,13 +14,19 @@ public class ByteInKilobyte {
         if(whatIn){
             System.out.println("Введите значение в байтах!");
             numberByte = in.nextInt();
-            numberKilobyte = numberByte / 1024;
+            numberKilobyte = byteInKilobyte(numberByte);
             System.out.println(numberByte+" байт, равно "+numberKilobyte+" килобайт.");
         }else {
             System.out.println("Введите значение в килобайтах!");
             numberKilobyte = in.nextInt();
-            numberByte = numberKilobyte * 1024;
+            numberByte = kilobyteInByte(numberKilobyte);
             System.out.println(numberKilobyte+" килобайт, равно "+numberByte+" байт.");
         }
+    }
+    public static double byteInKilobyte(double number){
+        return number / 1024;
+    }
+    public static double kilobyteInByte(double number){
+        return number * 1024;
     }
 }

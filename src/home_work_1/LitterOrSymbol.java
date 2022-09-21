@@ -8,12 +8,14 @@ public class LitterOrSymbol {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите число!");
         int number = in.nextInt();
+        System.out.println(litterOrSymbol(number));
+    }
+    public static String litterOrSymbol(int number){
         char litterOrSymbol = (char) number;
-
         if ((number >= 65 && number <= 90) || (number >= 97 && number <= 122)) {
-            System.out.println("Вы ввели номер буквы : " + litterOrSymbol);
+            return "Вы ввели номер буквы : " + litterOrSymbol;
         }else {
-            System.out.println("Вы ввели номер символа : " + litterOrSymbol);
+            return "Вы ввели номер символа : " + litterOrSymbol;
         }
     }
 }

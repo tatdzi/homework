@@ -1,9 +1,8 @@
 package home_work_2.arrays;
 
-import java.io.CharArrayReader;
 import java.util.Arrays;
 
-import static home_work_2.utils.ArrayUtils.arrayRandom;
+import static home_work_2.arrays.utils.ArrayUtils.arrayRandom;
 
 public class Task_2_4 {
     public static void main(String[] args) {

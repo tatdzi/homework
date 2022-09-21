@@ -1,4 +1,4 @@
-package home_work_2.utils;
+package home_work_2.arrays.utils;
 
 import home_work_1.AverageNumberSearch;
 

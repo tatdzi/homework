@@ -5,26 +5,9 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Task_1_3 {
-    public static void main(String[] args) {
-        int degree;
-        double number,result;
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите первое число!");
-        while (!(in.hasNextDouble())){
-            System.out.println("Выввели неправильные данные!" +
-                    "\nПопробуйте снова!");
-            in.next();
-        }
-        number =in.nextDouble();
-        System.out.println("Введите второе число!");
-        //Проверка положительное ли число.
-        if ((degree = AverageNumberSearch.enterAndChackInt(in)) < 0) {
-            System.out.println("Ввенное число отрицательное!" +
-                    "\nПопробуйте еще раз!");
-            degree = AverageNumberSearch.enterAndChackInt(in);
-        }
-        result = inDegree(number,degree);
-        System.out.println(number+" ^ "+degree+" = "+ new DecimalFormat( "###,###.0#" ).format(result));
+
+    public static String format(double number, int degree, double result){
+        return number+" ^ "+degree+" = "+ new DecimalFormat( "###,###.0#" ).format(result);
     }
 
     /**
