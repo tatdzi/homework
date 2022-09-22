@@ -1,7 +1,7 @@
 package home_work_5.comparators;
 
-import home_work_5.api.dto.Animal;
-import home_work_5.api.dto.Person;
+import home_work_5.dto.Animal;
+import home_work_5.dto.Person;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
