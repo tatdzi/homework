@@ -13,10 +13,9 @@ public class NickGeneratorFromFile implements IGenerator {
     @Override
     public String generate() {
         String name = "";
-        try {
-            int count = this.rnd.nextInt(1,11);
-            File data = new File("homework\\src\\home_work_5\\files\\nicks.txt");
-            BufferedReader line = new BufferedReader(new FileReader(data));
+        try (BufferedReader line = new BufferedReader(new FileReader
+                ("homework\\src\\home_work_5\\files\\nicks.txt"))) {
+            int count = this.rnd.nextInt(1, 11);
             for (int i = 1; i <= count; i++) {
                 if (i == count) {
                     name = line.readLine();
@@ -25,10 +24,10 @@ public class NickGeneratorFromFile implements IGenerator {
                 }
             }
             return name;
-        } catch (FileNotFoundException e) {
-            return null;
+        } catch (FileNotFoundException d) {
+            return "FileNotFoundException";
         } catch (IOException f) {
-            return null;
+            return "IOException";
         }
     }
 }

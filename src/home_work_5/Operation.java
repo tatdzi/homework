@@ -4,7 +4,7 @@ import home_work_5.api.IGenerator;
 import home_work_5.dto.Animal;
 import home_work_5.dto.Person;
 
-import javax.swing.text.html.HTMLDocument;
+
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,7 +15,15 @@ public class Operation {
 
     }
 
-    public void addPerson(IGenerator nick,IGenerator password, IGenerator name, List<Person> people, int count){
+    /**
+     *
+     * @param nick
+     * @param password
+     * @param name
+     * @param people
+     * @param count
+     */
+    public void genPerson(IGenerator nick,IGenerator password, IGenerator name, Collection<Person> people, int count){
         String name1 = "Заполнение коллекции из "+count+ " Person";
         long start = System.currentTimeMillis();
         for (int i = 0; i<count; i++){
@@ -30,19 +38,22 @@ public class Operation {
     }
 
 
-    public void addAnimal (IGenerator nick, Set<Animal> animal, int count){
+    public void genAnimal (IGenerator nick,int number, Collection<Animal> animal, int count){
         ThreadLocalRandom rnd = ThreadLocalRandom.current();
         String name = "Заполнение коллекции из "+count+ " Animal";
         long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
             animal.add(new Animal(
-                    rnd.nextInt(5,11),
+                    rnd.nextInt(number+1),
                     nick.generate()
             ));
         }
         long time = System.currentTimeMillis() - start;
         this.chackTimes.add(new ChackTimeOperation(name,time));
     }
+
+
+
     public void sortJDK(List list,Comparator comparator){
         String name = "Сортировка коллекции средствами jdk";
         long start = System.currentTimeMillis();
@@ -66,25 +77,44 @@ public class Operation {
         long time = System.currentTimeMillis() - start;
         this.chackTimes.add(new ChackTimeOperation(name,time));
     }
-    public <T> String iterationTime1(List<T> list){
-        String name = "Сортировка коллекции моим методом";
+    public <T> void iterationTime1(Collection<T> list){
+        String name = "Итеррирование ";
         long start = System.currentTimeMillis();
         for (T element: list){
+            System.out.println(element.toString());
         }
         long time = System.currentTimeMillis() - start;
-        return "Время итерации: "+time+" мс";
+        this.chackTimes.add(new ChackTimeOperation(name,time));
     }
 
-    public <T> String iterationTime2(List<T> list){
+    public <T> void iterationTime2(Collection<T> list){
         String name = "Итерирование с помощью iterator ";
         long start = System.currentTimeMillis();
         Iterator<T> iterator = list.iterator();
         while (iterator.hasNext()){
-            iterator.next();
+            System.out.println(iterator.next());
         }
         long time = System.currentTimeMillis() - start;
         this.chackTimes.add(new ChackTimeOperation(name,time));
-        return "Время итерации: "+time+" мс";
+    }
+
+    public <T> void deleteCollection1(Collection<T> list){
+        String name = "Удаление с помощью iterator ";
+        long start = System.currentTimeMillis();
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()){
+            list.remove(iterator.next());
+        }
+        long time = System.currentTimeMillis() - start;
+        this.chackTimes.add(new ChackTimeOperation(name,time));
+    }
+
+    public <T> void deleteCollection2(Collection<T> list){
+        String name = "Удаление";
+        long start = System.currentTimeMillis();
+        list.removeAll(list);
+        long time = System.currentTimeMillis() - start;
+        this.chackTimes.add(new ChackTimeOperation(name,time));
     }
 
 
