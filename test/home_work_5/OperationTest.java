@@ -4,10 +4,5 @@ import org.junit.jupiter.api.Test;
 
 public class OperationTest {
 
-    @Test
-    void sortTest(){
-        Operation operation = new Operation();
-        int
-        Appendable
-    }
+
 }

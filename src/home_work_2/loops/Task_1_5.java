@@ -6,31 +6,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Task_1_5 {
-    public static void main(String[] args) {
-        int number,result;
-        double rand;
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите число!");
-        //Проверка положительное ли число.
-        if ((number = AverageNumberSearch.enterAndChackInt(in)) < 0) {
-            System.out.println("Ввенное число отрицательное!" +
-                    "\nПопробуйте еще раз!");
-            number = AverageNumberSearch.enterAndChackInt(in);
-        }
-        result = higestFigure(number);
-        System.out.println(result);
-        rand =randTest();
-        System.out.println("Вероятность четных случайных чисел : "+rand+"%");
-        String c = count(number);
-        System.out.println(c);
-        String f =fibo(17);
-        System.out.println(f);
-        String d =task5(10,35,5);
-        System.out.println(d);
-        String C =chahge(23456789);
-        System.out.println(C);
-
-    }
 
     /**
      * Метод higestFigure находит наибольшую цифру натурального числа.
@@ -55,33 +30,44 @@ public class Task_1_5 {
     public static double randTest(){
         int num = 0;
         Random rand = new Random();
-        for (int i =0;i<1000;++i){
+        for (int i =0;i<100000;++i){
             int r = rand.nextInt(10);
             if (r%2==0){
                 ++num;
             }
         }
-        return  num/10.0;
+        return  Math.round(num/1000.0);
     }
 
     /**
-     * Метод считает четные и нечетные цифры числа.
+     * Метод считает четные цифры числа.
      * @param a
      * @return
      */
-    public static String count(int a){
-        String result;
+    public static int countHonetNumbers(int a){
         int b = 0;
-        int c = 0;
         while (a > 0) {
             if ((a%10)%2 == 0 ) {
                 ++b;
-            }else {
-                ++c;
             }
             a/=10;
         }
-        return result ="В числе содержится "+b+" четных и "+c+" нечетных цифр";
+      return b;
+    }
+    /**
+     * Метод считает нечетные цифры числа.
+     * @param a
+     * @return
+     */
+    public static int countOddNumbers(int a){
+        int b = 0;
+        while (a > 0) {
+            if (!((a%10)%2 == 0 )) {
+                ++b;
+            }
+            a/=10;
+        }
+        return b;
     }
 
     /**
@@ -123,13 +109,13 @@ public class Task_1_5 {
      * @param a
      * @return
      */
-    public static String chahge(int a){
+    public static int change(int a){
         String result="";
         while (a>0){
             result +=(a%10);
             a/=10;
         }
-        return result;
+        return Integer.parseInt(result);
     }
 
 }

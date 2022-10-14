@@ -1,7 +1,7 @@
 package home_work_2.arrays;
 
 public interface IArraysOperation {
-    public void allElements();
-    public void eachSecondElements();
-    public void elementsInReverseOrder();
+    public int[] allElements(int[] num);
+    public int[] eachSecondElements(int[] num);
+    public int[] elementsInReverseOrder(int[] num);
 }

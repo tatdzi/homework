@@ -1,6 +1,6 @@
 package home_work_2.arrays;
 
-import home_work_2.arrays.utils.ArrayUtils;
+import home_work_2.utils.ArrayUtils;
 
 import java.util.Scanner;
 
