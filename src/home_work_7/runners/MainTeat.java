@@ -8,6 +8,8 @@ import home_work_7.searchers.EasySearch;
 import home_work_7.searchers.RegExSearch;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public class MainTeat {
@@ -26,6 +28,13 @@ public class MainTeat {
         long i2 = es2.search(book.toString(),"и");
         System.out.println(i1);
         System.out.println(i2);
+        File file1 = new File("homework\\src\\home_work_7\\files\\result.txt");
+        try (FileWriter writer = new FileWriter(file1)){
+
+
+        }catch (IOException ioException){
+            ioException.printStackTrace();
+        }
 
     }
 }

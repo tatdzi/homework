@@ -22,6 +22,7 @@ public class MyRunnable implements Runnable {
         IBook book = new Book(this.file);
         long count = easySearch.search(book.toString(),this.word);
         File file = new File("homework\\src\\home_work_7\\files\\result.txt");
+
         try {
             FileWriter writer = new FileWriter(file,true);
             writer.write(this.file.getName()+", Слово : "+this.word+" Количество : "+count+"\n");
