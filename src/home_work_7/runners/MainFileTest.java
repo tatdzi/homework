@@ -22,7 +22,7 @@ public class MainFileTest {
         ISearchEngine es = new EasySearchNextLevel();
         IWriterResult writerResult = new WriterResult("homework/src/home_work_7/files");
         File root = new File(args[0]);
-        if (!root.isDirectory()){
+        while (!root.isDirectory()){
             System.out.println("Введите верный адрес директории!");
             root = new File(input.nextLine());
         }

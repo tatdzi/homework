@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 public class CalculatorAdapter {
     private ICalculator calc;
     private final PriorityQueue<IHandler> queue = new PriorityQueue<>
-            ((o1, o2) -> o1.getPriority()-o2.getPriority());
+            ((o1, o2) -> o1.getPriority()-o2.getPriority());// - эта строка описывает каким образом определяется приоритетность компонентов списка
 
 
     public CalculatorAdapter(){
